@@ -9,10 +9,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+let cars = ["Mercedes", "Dodge", "Honda"]
+    
+    @IBOutlet var tableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+       tableView.delegate = self
+       tableView.dataSource = self
+       tableView.tableFooterView = UIView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -22,4 +26,31 @@ class ViewController: UIViewController {
 
 
 }
+
+extension ViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return cars.count
+    }
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "testCell", for: indexPath) as! testCell
+        cell.lbl.text = cars[indexPath.row]
+        cell.backgroundColor = UIColor.red
+        cell.layer.cornerRadius = 10.4
+        return cell
+    }
+    
+}
+extension ViewController: UITableViewDelegate {
+    //
+}
+
+
+
+
+
+
+
+
+
+
 
